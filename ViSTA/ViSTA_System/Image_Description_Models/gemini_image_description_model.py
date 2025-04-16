@@ -11,7 +11,7 @@ class GeminiImageDescriptionModel(ImageDescriptionModel):
         goog_key = os.environ.get("GOOG_KEY")
         genai.configure(api_key=goog_key)
         generation_config = genai.GenerationConfig(temperature=0)
-        self.__model = genai.GenerativeModel("gemini-1.5-pro", generation_config=generation_config)
+        self.__model = genai.GenerativeModel("gemini-2.0-flash", generation_config=generation_config)
 
     def _generate_content(self, prompt, image_file):
         """
