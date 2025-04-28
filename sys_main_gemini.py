@@ -176,7 +176,7 @@ def main():
         manifest,
         image_directory,
         lambda additional_context, front, back=None: generate_metadata(
-            front, image_processor, transcription_model, image_description_model, metadata_exporter, output_csv  ,token_tracker, ViSTA_logger, log_file_path, back
+            additional_context, front, image_processor, transcription_model, image_description_model, metadata_exporter, output_csv  ,token_tracker, ViSTA_logger, log_file_path, back
         )
     )
 
