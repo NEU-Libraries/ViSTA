@@ -58,7 +58,7 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
         # process front-back pair or single front image if it is the last item
         if last_item:
             if back_image_path:
-                generate_metadata(additional_context, front_image_path,back_image_path)
+                generate_metadata(additional_context, front_image_path, back_image_path)
                 # reset paths for next group
                 front_image_path = ""
                 back_image_path = ""
@@ -68,7 +68,7 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
                 front_image_path = ""
                 back_image_path = ""
 
-def generate_metadata(additional_context, image_front_path,image_processor,transcription_model,image_description_model,metadata_exporter,csv_file,token_tracker,logger,log_file_path,image_back_path=None):
+def generate_metadata(additional_context, image_front_path, image_processor, transcription_model,image_description_model, metadata_exporter, csv_file, token_tracker, logger, log_file_path, image_back_path=None):
     """
     Generates metadata for a single image and writes it to a csv file
     Works with either a single image, or an image_front/back pairing
@@ -176,7 +176,7 @@ def main():
         manifest,
         image_directory,
         lambda front, back=None: generate_metadata(
-            front, image_processor, transcription_model, image_description_model, metadata_exporter, output_csv  ,token_tracker, ViSTA_logger, log_file_path,back
+             front, image_processor, transcription_model, image_description_model, metadata_exporter, output_csv  ,token_tracker, ViSTA_logger, log_file_path, back
         )
     )
 
