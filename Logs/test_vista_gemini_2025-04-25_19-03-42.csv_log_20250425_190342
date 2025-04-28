@@ -1,0 +1,2 @@
+File Name,Process Start Time,Process End Time,Error Message
+../Test-Batches/test_vista/M214_1015936037_0001_0001_A.tif,2025-04-25 19:03:42,2025-04-25 19:03:50,[Errno 2] No such file or directory: 'efs-dps/output/CSV_Files/test_vista_gemini_2025-04-25_19-03-42.csv'
