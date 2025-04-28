@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import sys
 sys.path.append("/home/ec2-user/ViSTA_System")
-# UPDATE TEST 
-# hellloooooo
 
 from Image_Processors.gemini_image_processor import GeminiImageProcessor
 from Transcription_Models.gemini_transcription_model import GeminiTranscriptionModel
@@ -47,6 +45,7 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
         file_name = row['File Name']
         sequence = row['Sequence']
         last_item = row['Last Item']
+        additional_context = row['Context']
 
         image_path = f"{image_directory}/{file_name}"
 
@@ -59,17 +58,17 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
         # process front-back pair or single front image if it is the last item
         if last_item:
             if back_image_path:
-                generate_metadata(front_image_path,back_image_path)
+                generate_metadata(additional_context, front_image_path,back_image_path)
                 # reset paths for next group
                 front_image_path = ""
                 back_image_path = ""
             else:
-                generate_metadata(front_image_path)
+                generate_metadata(additional_context, front_image_path)
                 # reset paths for next group
                 front_image_path = ""
                 back_image_path = ""
 
-def generate_metadata(image_front_path,image_processor,transcription_model,image_description_model,metadata_exporter,csv_file,token_tracker,logger,log_file_path,image_back_path=None):
+def generate_metadata(additional_context, image_front_path,image_processor,transcription_model,image_description_model,metadata_exporter,csv_file,token_tracker,logger,log_file_path,image_back_path=None):
     """
     Generates metadata for a single image and writes it to a csv file
     Works with either a single image, or an image_front/back pairing
@@ -99,6 +98,8 @@ def generate_metadata(image_front_path,image_processor,transcription_model,image
             image_back = image_processor.process_image(image_back_path)
             transcription = transcription_model.generate_transcription(image_back)
             context = transcription.transcription
+
+        context = context + " " + additional_context
 
         # Generate title and abstract
         title = image_description_model.generate_title(image_front, context)
