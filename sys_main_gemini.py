@@ -45,8 +45,12 @@ def process_manifest_images(context, manifest,image_directory, generate_metadata
         file_name = row['File Name'] # name of file being processed 
         sequence = row['Sequence'] # 1 if front image, 2 if back image
         last_item = row['Last Item'] # boolean, is it the last image?
-        additional_context = context + ' ' + row['Context'] # place to add info about the image for the gemini prompt
+        additional_context = row['Context'] # place to add info about the image for the gemini prompt
 
+        print (additional_context)
+        print(context)
+
+        additional_context = context + ' ' + additional_context
         image_path = f"{image_directory}/{file_name}"
 
         if sequence == 1:  # front image
