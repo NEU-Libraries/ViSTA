@@ -42,10 +42,10 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
     back_image_path = None
 
     for _, row in manifest.iterrows():
-        file_name = row['File Name']
-        sequence = row['Sequence']
-        last_item = row['Last Item']
-        additional_context = row['Context']
+        file_name = row['File Name'] # name of file being processed 
+        sequence = row['Sequence'] # 1 if front image, 2 if back image
+        last_item = row['Last Item'] # boolean, is it the last image?
+        additional_context = row['Context'] # place to add info about the image for the gemini prompt
 
         image_path = f"{image_directory}/{file_name}"
 
@@ -99,7 +99,6 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
             transcription = transcription_model.generate_transcription(image_back)
             context = transcription.transcription
 
-        print(additional_context)
         context = context + " " + additional_context
 
         # Generate title and abstract
@@ -144,8 +143,6 @@ def main():
     manifest = load_manifest(f"{image_directory}/manifest.xlsx")
 
     output_csv = f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
-    
-    print(output_csv)
 
     #Initialize image_processor
     image_processor = GeminiImageProcessor()
@@ -183,12 +180,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-#Prompt for csv file name
-#Prompt for log file name
-
-#Do not judge based on word order judge based on level of phrases
-#Keyword ground truth
-
