@@ -26,7 +26,7 @@ def load_manifest(manifest):
     manifest_dataframe['Last Item'] = manifest_dataframe['Last Item'].fillna(False).astype(bool)
     return manifest_dataframe
 
-def process_manifest_images(manifest,image_directory, generate_metadata):
+def process_manifest_images(context, manifest,image_directory, generate_metadata):
     """
     Process images from a manifest file.
     Handles front-back and front-only cases.
@@ -45,7 +45,7 @@ def process_manifest_images(manifest,image_directory, generate_metadata):
         file_name = row['File Name'] # name of file being processed 
         sequence = row['Sequence'] # 1 if front image, 2 if back image
         last_item = row['Last Item'] # boolean, is it the last image?
-        additional_context = row['Context'] # place to add info about the image for the gemini prompt
+        additional_context = context + ' ' + row['Context'] # place to add info about the image for the gemini prompt
 
         image_path = f"{image_directory}/{file_name}"
 
@@ -144,6 +144,9 @@ def main():
 
     output_csv = f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
 
+    # Get Any Additional Context they want Added
+    context = input("Any additional context to add to the prompt of all of these images? Enter nothing if not:")
+
     #Initialize image_processor
     image_processor = GeminiImageProcessor()
 
@@ -171,6 +174,7 @@ def main():
 
     #ACTUAL PROCESSING FUNCTION AFTER MODULE CREATION STEPS
     process_manifest_images(
+        context,
         manifest,
         image_directory,
         lambda additional_context, front, back=None: generate_metadata(
