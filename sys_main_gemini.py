@@ -47,10 +47,8 @@ def process_manifest_images(context, manifest,image_directory, generate_metadata
         last_item = row['Last Item'] # boolean, is it the last image?
         additional_context = row['Context'] # place to add info about the image for the gemini prompt
 
-        print (additional_context)
-        print(context)
-
-        additional_context = context + ' ' + additional_context
+        # if there's universal context for all images in the batch, it's added to the prompt here
+        additional_context = additional_context + ", " + context
         image_path = f"{image_directory}/{file_name}"
 
         if sequence == 1:  # front image
@@ -103,7 +101,7 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
             transcription = transcription_model.generate_transcription(image_back)
             context = transcription.transcription
 
-        context = context + " " + additional_context
+        context = context + ", " + additional_context
 
         # Generate title and abstract
         title = image_description_model.generate_title(image_front, context)
