@@ -14,7 +14,8 @@ import pandas as pd
 from datetime import datetime
 
 import os
-LOG_DIR = os.getenv("VISTA_LOG_DIR", "/home/ec2-user/efs-dps/output/Logs")
+LOG_DIR = os.getenv("VISTA_LOG_DIR", "/home/ec2-user/efs-dps/output/Logs") 
+# must change when implement environment variables
 
 def load_manifest(manifest):
     """
@@ -74,6 +75,7 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
     """
     Generates metadata for a single image and writes it to a csv file
     Works with either a single image, or an image_front/back pairing
+    :param additional_context: additional context to enhance transcription results
     :param image_front_path: path to the image
     :param image_processor: ImageProcessor object to process image @ image_front_path
     :param transcription_model: TranscriptionModel object to generate a Transcription (object)
@@ -101,6 +103,7 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
             transcription = transcription_model.generate_transcription(image_back)
             context = transcription.transcription
 
+        # Add context and additional context (if exist)
         context = context + ", " + additional_context
 
         # Generate title and abstract
@@ -149,15 +152,17 @@ def main():
     # Get Any Additional Context they want Added
     context = input("Any additional context to add to the prompt of all of these images? Enter nothing if not:")
 
-    #Initialize image_processor
+    # Initialize image_processor
     image_processor = GeminiImageProcessor()
 
-    #Initialize token tracker class
+    # Initialize token tracker class
     token_tracker = GeminiTokenTracker()
 
-    #Initialize logger and generate a log
+    # Initialize logger and generate a log
     ViSTA_logger = Logger(LOG_DIR)
-    log_file_path = ViSTA_logger.generate_log(f'{output_csv}_log') #<----- ENTER PATH HERE
+    
+    log_file_path = ViSTA_logger.generate_log(f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_log.csv") 
+    # log_file_path = ViSTA_logger.generate_log(f'{output_csv}_log') #<----- ENTER PATH HERE
 
 
     #Initialize transcription model
