@@ -162,6 +162,7 @@ def main():
     ViSTA_logger = Logger(LOG_DIR)
     
     log_file_path = ViSTA_logger.generate_log(f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_log.csv") 
+    print(log_file_path)
     # log_file_path = ViSTA_logger.generate_log(f'{output_csv}_log') #<----- ENTER PATH HERE
 
 
