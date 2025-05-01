@@ -161,7 +161,8 @@ def main():
     # Initialize logger and generate a log
     ViSTA_logger = Logger(LOG_DIR)
     
-    log_file_path = ViSTA_logger.generate_log(f'{output_csv}_log') #<----- ENTER PATH HERE
+    log_file_path = ViSTA_logger.generate_log(f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_log.csv") 
+    # log_file_path = ViSTA_logger.generate_log(f'{output_csv}') #<----- ENTER PATH HERE
 
 
     #Initialize transcription model
