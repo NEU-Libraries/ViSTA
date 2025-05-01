@@ -143,7 +143,7 @@ def main():
     image_directory = f"/home/ec2-user/efs-dps/input/{image_directory}"
     manifest = load_manifest(f"{image_directory}/manifest.xlsx")
     """
-    image_batch_name = input("Name of image batch directory uploaded to the test-batches directory that you want to be processed:")
+    image_batch_name = input("Name of image batch directory uploaded to the test-batches directory that you want to be processed: ")
     image_directory = f"../Test-Batches/{image_batch_name}"
     manifest = load_manifest(f"{image_directory}/manifest.xlsx")
 
