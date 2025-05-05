@@ -9,9 +9,7 @@ class MetadataExporter(ABC):
     Class that packages and exports metadata information objects into a variety of formats
     Supports csv and json exports
     """
-
-    CSV_DIR = Path(os.environ["CSV_DIR"])
-
+    
     def write_to_csv(self, metadata,csv_name):
         """
         Takes metadata object and appends contents to the given csv file
@@ -19,7 +17,10 @@ class MetadataExporter(ABC):
         :param csv_name: name of the csv file that the metadata will be appended into
         :return: None: csv file will be altered in place
         """
-        with open(f"CSV_DIR/{csv_name}", "a") as csv_file:
+        CSV_DIR = Path(os.environ["CSV_DIR"])
+        csv_path = CSV_DIR / csv_name
+
+        with open(csv_path, "a") as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(metadata.get_metadata_as_list())
 
