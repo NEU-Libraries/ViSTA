@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 import json
 import csv
 import os
+import pathlib as Path
+
+CSV_DIR = Path(os.environ["CSV_DIR"])
 
 class MetadataExporter(ABC):
     """
@@ -16,7 +19,7 @@ class MetadataExporter(ABC):
         :param csv_name: name of the csv file that the metadata will be appended into
         :return: None: csv file will be altered in place
         """
-        with open(f"/home/ec2-user/efs-dps/output/CSV_Files/{csv_name}", "a") as csv_file:
+        with open(f"CSV_DIR/{csv_name}", "a") as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(metadata.get_metadata_as_list())
 
