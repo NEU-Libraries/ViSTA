@@ -12,10 +12,14 @@ from logger import Logger
 from Token_Trackers.gemini_token_tracker import GeminiTokenTracker
 import pandas as pd
 from datetime import datetime
-
 import os
-LOG_DIR = os.getenv("VISTA_LOG_DIR", "/home/ec2-user/efs-dps/output/Logs") 
-# must change when implement environment variables
+from pathlib import Path
+
+# environment variable paths
+INPUT_DIR = Path(os.environ["INPUT_DIR"])
+OUTPUT_DIR = Path(os.environ["OUTPUT_DIR"])
+LOG_DIR = Path(os.environ["LOG_DIR"])
+CSV_DIR = Path(os.environ["CSV_DIR"])
 
 def load_manifest(manifest):
     """
@@ -27,7 +31,7 @@ def load_manifest(manifest):
     manifest_dataframe['Last Item'] = manifest_dataframe['Last Item'].fillna(False).astype(bool)
     return manifest_dataframe
 
-def process_manifest_images(context, manifest,image_directory, generate_metadata):
+def process_manifest_images(context, manifest, image_directory, generate_metadata):
     """
     Process images from a manifest file.
     Handles front-back and front-only cases.
@@ -136,13 +140,8 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
 
 
 def main():
-    #Ask for the image_directory they want to process
+    # Ask for the image_directory they want to process
 
-    """
-    image_directory = input("Name of image batch directory uploaded to the efs-dps/input directory that you want to be processed:")
-    image_directory = f"/home/ec2-user/efs-dps/input/{image_directory}"
-    manifest = load_manifest(f"{image_directory}/manifest.xlsx")
-    """
     image_batch_name = input("Name of image batch directory uploaded to the test-batches directory that you want to be processed: ")
     image_directory = f"../Test-Batches/{image_batch_name}"
     manifest = load_manifest(f"{image_directory}/manifest.xlsx")
@@ -162,7 +161,6 @@ def main():
     ViSTA_logger = Logger(LOG_DIR)
     
     log_file_path = ViSTA_logger.generate_log(f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_log.csv") 
-    # log_file_path = ViSTA_logger.generate_log(f'{output_csv}') #<----- ENTER PATH HERE
 
 
     #Initialize transcription model
