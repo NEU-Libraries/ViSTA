@@ -4,13 +4,13 @@ import csv
 import os
 import pathlib as Path
 
-CSV_DIR = Path(os.environ["CSV_DIR"])
-
 class MetadataExporter(ABC):
     """
     Class that packages and exports metadata information objects into a variety of formats
     Supports csv and json exports
     """
+    
+    CSV_DIR = Path(os.environ["CSV_DIR"])
 
     def write_to_csv(self, metadata,csv_name):
         """
