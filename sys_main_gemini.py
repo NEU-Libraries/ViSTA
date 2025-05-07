@@ -54,12 +54,14 @@ def process_manifest_images(context, manifest, image_directory, generate_metadat
 
         #testing 
         print(context)
-        print(additional_context)
+        print(additional_context) 
         
         # if there's universal context for all images in the batch, it's added to the prompt here
-        additional_context = additional_context + ", " + context
+        if not pd.isna(additional_context): # checking that something was added
+            additional_context = additional_context + ", " + context
+        
         image_path = f"{image_directory}/{file_name}"
-
+        
         if sequence == 1:  # front image
             front_image_path = image_path
         elif sequence == 2:  # back image
