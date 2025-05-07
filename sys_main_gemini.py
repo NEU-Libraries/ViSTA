@@ -52,6 +52,10 @@ def process_manifest_images(context, manifest, image_directory, generate_metadat
         last_item = row['Last Item'] # boolean, is it the last image?
         additional_context = row['Context'] # place to add info about the image for the gemini prompt
 
+        #testing 
+        print(context)
+        print(additional_context)
+        
         # if there's universal context for all images in the batch, it's added to the prompt here
         additional_context = additional_context + ", " + context
         image_path = f"{image_directory}/{file_name}"
