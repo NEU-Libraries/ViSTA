@@ -114,7 +114,8 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
             context = transcription.transcription
 
         # Add context and additional context (if exist)
-        context = context + ", " + additional_context
+        if not pd.isna(additional_context):
+            context = context + ", " + additional_context
 
         # Generate title and abstract
         title = image_description_model.generate_title(image_front, context)
