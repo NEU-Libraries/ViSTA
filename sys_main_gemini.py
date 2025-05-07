@@ -51,10 +51,6 @@ def process_manifest_images(context, manifest, image_directory, generate_metadat
         sequence = row['Sequence'] # 1 if front image, 2 if back image
         last_item = row['Last Item'] # boolean, is it the last image?
         additional_context = row['Context'] # place to add info about the image for the gemini prompt
-
-        #testing 
-        print(context)
-        print(additional_context) 
         
         # if there's universal context for all images in the batch, it's added to the prompt here
         if not pd.isna(additional_context): # checking that something was added
