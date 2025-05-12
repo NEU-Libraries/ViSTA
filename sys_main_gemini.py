@@ -15,7 +15,7 @@ from datetime import datetime
 import os
 from pathlib import Path
 
-# environment variable paths
+# environment variable paths (on server)
 INPUT_DIR = Path(os.environ["INPUT_DIR"])
 OUTPUT_DIR = Path(os.environ["OUTPUT_DIR"])
 LOG_DIR = Path(os.environ["LOG_DIR"])
