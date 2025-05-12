@@ -145,8 +145,15 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
 def main():
     # Ask for the image_directory they want to process
 
-    image_batch_name = input("Name of image batch directory uploaded to the test-batches directory that you want to be processed: ")
-    image_directory = f"../Test-Batches/{image_batch_name}"
+    # while loop that prompts users to keep re-entering folder name until a valid (existing) one is entered
+    while True:
+        image_batch_name = input("Name of image batch directory uploaded to the test-batches directory that you want to be processed: ")
+        image_directory = f"../Test-Batches/{image_batch_name}"
+    
+        if os.path.isdir(image_directory):
+            break  # Valid directory, exit loop
+    print(f"'{image_batch_name}' does not exist in ../input folder. Please try again.")
+
     manifest = load_manifest(f"{image_directory}/manifest.xlsx")
 
     output_csv = f"{image_batch_name}_gemini_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
