@@ -5,4 +5,5 @@ ADHERE to these general rules for an abstract:
 - If context is provided, INCLUDE details such as dates, significant topics, events, people, places, etc.
 - Describe the composition of the image, highlighting the most significant elements.
 
-Please generate an abstract based on these rules. Additional context from the back of the photo, if provided, SHOULD BE USED to create a more descriptive and accurate abstract:
+Please generate an abstract based on these rules. 
+Additional context transcribed from the back of the photo, if provided, SHOULD BE USED to create a more descriptive and accurate abstract:

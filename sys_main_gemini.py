@@ -54,7 +54,8 @@ def process_manifest_images(context, manifest, image_directory, generate_metadat
         
         # if there's universal context for all images in the batch, it's added to the prompt here
         if not pd.isna(additional_context): # checking that something was added
-            additional_context = additional_context + ", " + context
+            add_info = "The following info is context manually added by the librarian. This information should be prioritized over the transcription as it's more accurate:"
+            additional_context = add_info + additional_context + ", " + context
         
         image_path = f"{image_directory}/{file_name}"
         
