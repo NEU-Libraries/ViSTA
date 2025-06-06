@@ -25,14 +25,14 @@ class GeminiImageDescriptionModel(ImageDescriptionModel):
 
     def generate_title(self, image_file, context=""):
         title_prompt = self.title_generation_prompt + context
-        print(title_prompt)
+        #print(title_prompt) -> used in testing to ensure desired title prompt is used
         response = self._generate_content(title_prompt, image_file)
         self.token_tracker.update_token_tracker(response[1])
         return response[0]
 
     def generate_abstract(self, image_file, context=""):
         abstract_prompt = self.abstract_generation_prompt + context
-        print(abstract_prompt)
+        #print(abstract_prompt) -> used in testing to ensure desired abstract prompt is used
         response = self._generate_content(abstract_prompt, image_file)
         self.token_tracker.update_token_tracker(response[1])
         return response[0]
