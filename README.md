@@ -4,8 +4,7 @@ This repository is primarily aimed at processing undigitized images from the Dig
 
 This repository is open for use by anyone interested in metadata tagging and annotation, including but not limited to libraries, archives, and other literary organizations.
 
-Below is a diagram illustrating how ViSTA currently runs
-**[LINK TO ViSTA Pipeline](https://drive.google.com/file/d/1nGYczoj3l8fU7gh0cm3Bv9xO6-JgePxL/view?pli=1)**
+A diagram illustrating how ViSTA currently runs: **[LINK TO ViSTA Pipeline](https://drive.google.com/file/d/1nGYczoj3l8fU7gh0cm3Bv9xO6-JgePxL/view?pli=1)**
 
 ### How It Works
 1. **Additional Context**  Users can add info to accompany specific photos in the manifest file, or generally to all photos in a folder when prompted while running ViSTA. This information will be added to the prompt and given prioritization over transcription info.
