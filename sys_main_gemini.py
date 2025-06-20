@@ -109,7 +109,7 @@ def generate_metadata(additional_context, image_front_path, image_processor, tra
             image_back = image_processor.process_image(image_back_path)
             transcription = transcription_model.generate_transcription(image_back)
             context = transcription.transcription
-            print(context)
+           
 
         # Add context and additional context (if exist)
         if not pd.isna(additional_context):
